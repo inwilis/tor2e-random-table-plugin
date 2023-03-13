@@ -1,0 +1,10 @@
+{
+	"id": "tor2e-random-table-plugin",
+	"name": "Random Tables for TOR2e",
+	"version": "0.0.1",
+	"minAppVersion": "1.0.0",
+	"description": "Renders TOR2e random tables and allows rolling on those inside Obsidian note.",
+	"author": "inwilis",
+	"authorUrl": "https://github.com/inwilis",
+	"isDesktopOnly": false
+}

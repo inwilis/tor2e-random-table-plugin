@@ -1,0 +1,51 @@
+table.randomtable {
+    width: 100%;
+}
+
+table.randomtable.feat-die td:first-child, table.randomtable.feat-die th:first-child {
+    text-align: center;
+}
+
+table.randomtable tr.highlight td {
+    background: #c75959c2;
+}
+
+div.block-language-tor2e-random-table {
+    position: relative;
+}
+
+div.block-language-tor2e-random-table .randomtable-roll-button {
+    visibility: hidden;
+}
+
+div.block-language-tor2e-random-table:hover .randomtable-roll-button {
+    visibility: visible;
+}
+
+.randomtable-roll-button {
+    position: absolute;
+    display: flex;
+    top: 6px;
+    left: 6px;
+
+    padding: 4px;
+
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 6px;
+
+    cursor: pointer;
+}
+
+.randomtable-roll-button:hover {
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+}
+
+.randomtable-roll-button:active {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+table.randomtable td.eye-of-sauron {
+    --icon-size: 1.5em;
+}
