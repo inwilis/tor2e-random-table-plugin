@@ -1,8 +1,8 @@
-table.randomtable.feat-die td:first-child, table.randomtable.feat-die th:first-child {
+table.tor2e-random-table.feat-die td:first-child, table.tor2e-random-table.feat-die th:first-child {
     text-align: center;
 }
 
-table.randomtable tr.highlight td {
+table.tor2e-random-table tr.highlight td {
     background: #c75959c2;
 }
 
@@ -10,15 +10,15 @@ div.block-language-tor2e-random-table {
     position: relative;
 }
 
-div.block-language-tor2e-random-table .randomtable-roll-button {
+div.block-language-tor2e-random-table .tor2e-random-table-roll-button {
     visibility: hidden;
 }
 
-div.block-language-tor2e-random-table:hover .randomtable-roll-button {
+div.block-language-tor2e-random-table:hover .tor2e-random-table-roll-button {
     visibility: visible;
 }
 
-.randomtable-roll-button {
+.tor2e-random-table-roll-button {
     position: absolute;
     display: flex;
     top: 6px;
@@ -33,15 +33,15 @@ div.block-language-tor2e-random-table:hover .randomtable-roll-button {
     cursor: pointer;
 }
 
-.randomtable-roll-button:hover {
+.tor2e-random-table-roll-button:hover {
     background: rgba(255, 255, 255, 0.75);
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
 }
 
-.randomtable-roll-button:active {
+.tor2e-random-table-roll-button:active {
     background: rgba(255, 255, 255, 0.6);
 }
 
-table.randomtable td.eye-of-sauron {
+table.tor2e-random-table td.eye-of-sauron {
     --icon-size: 1.5em;
 }

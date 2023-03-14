@@ -1,6 +1,7 @@
 import {Rows} from "./Rows";
 import {setIcon} from "obsidian";
 import {randomIntFromInterval} from "./utils";
+import {CSS_CLASS_ROLL_BUTTON, CSS_CLASS_TABLE} from "../constants";
 
 export class RandomTable {
     readonly header: string[]
@@ -37,7 +38,7 @@ export class RandomTable {
 
             this.renderBody(tbody)
 
-            const button = el.createEl("span", {href: "#", cls: "randomtable-roll-button"})
+            const button = el.createEl("span", {href: "#", cls: CSS_CLASS_ROLL_BUTTON})
             setIcon(button, "dices")
 
             this.configureButton(button, table)
@@ -45,7 +46,7 @@ export class RandomTable {
     }
 
     configureButton(button: HTMLElement, table: HTMLTableElement) {
-        button.addEventListener("click", ev => {
+        button.addEventListener("click", () => {
             const rawRoll = this.roll()
             const roll = rawRoll.toString()
 
@@ -59,7 +60,7 @@ export class RandomTable {
     }
 
     getTableClass(): string {
-        return "randomtable"
+        return CSS_CLASS_TABLE
     }
 
     renderBody(tbody: HTMLTableSectionElement) {
