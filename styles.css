@@ -1,7 +1,3 @@
-table.randomtable {
-    width: 100%;
-}
-
 table.randomtable.feat-die td:first-child, table.randomtable.feat-die th:first-child {
     text-align: center;
 }
