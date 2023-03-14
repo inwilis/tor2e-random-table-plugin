@@ -14,22 +14,9 @@ export class FlatDistributionRandomTable extends RandomTable {
 
     renderBody(tbody: HTMLTableSectionElement) {
         this.rows.rows.forEach((row, row_index) => {
-            const tr = tbody.createEl("tr", {attr: {"roll": (row_index + 1).toString()}})
+            const tr = tbody.createEl("tr", {attr: {"roll": this.rows.rollsForRows[row_index].join(",")}})
             row.forEach((cell, col_index) => tr.createEl("td", {text: cell}))
         })
     }
 
-    configureButton(button: HTMLElement, table: HTMLTableElement) {
-        button.addEventListener("click", ev => {
-            const rawRoll = this.roll()
-            const roll = rawRoll.toString()
-
-            table.querySelectorAll("tr").forEach(el => {
-                el.removeClass("highlight")
-                if (roll == el.getAttribute("roll")) {
-                    el.addClass("highlight")
-                }
-            })
-        })
-    }
 }

@@ -44,6 +44,20 @@ export class RandomTable {
         }
     }
 
+    configureButton(button: HTMLElement, table: HTMLTableElement) {
+        button.addEventListener("click", ev => {
+            const rawRoll = this.roll()
+            const roll = rawRoll.toString()
+
+            table.querySelectorAll("tr").forEach(el => {
+                el.removeClass("highlight")
+                if ((el.getAttribute("roll") || "").split(",").includes(roll)) {
+                    el.addClass("highlight")
+                }
+            })
+        })
+    }
+
     getTableClass(): string {
         return "randomtable"
     }
@@ -52,7 +66,4 @@ export class RandomTable {
         // abstract
     }
 
-    configureButton(button: HTMLElement, table: HTMLTableElement) {
-        // abstract
-    }
 }

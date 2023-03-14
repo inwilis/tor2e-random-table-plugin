@@ -26,20 +26,6 @@ export class FeatDieRandomTable extends RandomTable {
         })
     }
 
-    configureButton(button: HTMLElement, table: HTMLTableElement) {
-        button.addEventListener("click", ev => {
-            const rawRoll = this.roll()
-            const roll = rawRoll.toString()
-
-            table.querySelectorAll("tr").forEach(el => {
-                el.removeClass("highlight")
-                if ((el.getAttribute("roll") || "").split(",").includes(roll)) {
-                    el.addClass("highlight")
-                }
-            })
-        })
-    }
-
     private createCell(parent: HTMLTableRowElement, text: string, column: number) {
         const td = parent.createEl("td", {text: text});
         if (column == 0) {
