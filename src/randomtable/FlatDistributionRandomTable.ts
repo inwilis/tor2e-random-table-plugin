@@ -4,8 +4,8 @@ import {ensureArraySize} from "./utils";
 
 export class FlatDistributionRandomTable extends RandomTable {
 
-    constructor(header: string[], rows: Rows) {
-        super(
+    constructor(containerEl: HTMLElement, header: string[], rows: Rows) {
+        super(containerEl,
             header.length > 0
                 ? ensureArraySize(header, rows.columnsCount)
                 : [],
@@ -15,7 +15,7 @@ export class FlatDistributionRandomTable extends RandomTable {
     renderBody(tbody: HTMLTableSectionElement) {
         this.rows.rows.forEach((row, row_index) => {
             const tr = tbody.createEl("tr", {attr: {"roll": this.rows.rollsForRows[row_index].join(",")}})
-            row.forEach((cell, col_index) => tr.createEl("td", {text: cell}))
+            row.forEach((cell) => tr.createEl("td", {text: cell}))
         })
     }
 

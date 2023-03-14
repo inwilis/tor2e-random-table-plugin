@@ -1,15 +1,16 @@
 import {Rows} from "./Rows";
-import {Notice, setIcon} from "obsidian";
+import {MarkdownRenderChild, Notice, setIcon} from "obsidian";
 import {randomIntFromInterval} from "./utils";
 import {CSS_CLASS_ROLL_BUTTON, CSS_CLASS_TABLE} from "../constants";
 
-export class RandomTable {
-    readonly header: string[]
-    readonly rows: Rows
+export abstract class RandomTable extends MarkdownRenderChild {
 
-    constructor(header: string[], rows: Rows) {
-        this.header = header;
-        this.rows = rows;
+    protected constructor(containerEl: HTMLElement, readonly header: string[], readonly rows: Rows) {
+        super(containerEl)
+    }
+
+    onload() {
+        this.render(this.containerEl)
     }
 
     roll(): number {
@@ -64,8 +65,6 @@ export class RandomTable {
         return CSS_CLASS_TABLE
     }
 
-    renderBody(tbody: HTMLTableSectionElement) {
-        // abstract
-    }
+    abstract renderBody(tbody: HTMLTableSectionElement): void;
 
 }

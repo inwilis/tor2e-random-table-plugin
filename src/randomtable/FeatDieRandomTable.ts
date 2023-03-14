@@ -5,16 +5,12 @@ import {ensureArraySize} from "./utils";
 
 export class FeatDieRandomTable extends RandomTable {
 
-    constructor(header: string[], rows: Rows) {
-        super(
+    constructor(containerEl: HTMLElement, header: string[], rows: Rows) {
+        super(containerEl,
             (header.length == 0 && rows.columnsCount == 3)
                 ? ["Feat Die Roll", "Result", "Description"]
                 : ensureArraySize(header, rows.columnsCount),
             rows);
-    }
-
-    getTableClass(): string {
-        return super.getTableClass() + " feat-die";
     }
 
     renderBody(tbody: HTMLTableSectionElement) {
