@@ -1,5 +1,5 @@
 import {Rows} from "./Rows";
-import {setIcon} from "obsidian";
+import {Notice, setIcon} from "obsidian";
 import {randomIntFromInterval} from "./utils";
 import {CSS_CLASS_ROLL_BUTTON, CSS_CLASS_TABLE} from "../constants";
 
@@ -47,8 +47,9 @@ export class RandomTable {
 
     configureButton(button: HTMLElement, table: HTMLTableElement) {
         button.addEventListener("click", () => {
-            const rawRoll = this.roll()
-            const roll = rawRoll.toString()
+            const roll = this.roll().toString()
+
+            new Notice(`Rolled ${roll}`, 1500);
 
             table.querySelectorAll("tr").forEach(el => {
                 el.removeClass("highlight")
