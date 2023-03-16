@@ -23,6 +23,7 @@ Random table is created with the code block of the following structure:
 
 ````
 ```tor2e-random-table
+caption: example table
 header:
   - first column
   - second column  
@@ -34,7 +35,9 @@ rows:
 ```
 ````
 
-Ths will render a table with two columns, named "first column" and "second column". 
+Ths will render a table with a caption of "example table", and two columns, named "first column" and "second column", with four rows.
+
+"Caption" attribute is not mandatory; if omitted, table will be rendered without caption.
 
 "Header" section is not mandatory; if omitted, table will be rendered without header. If number of header items is less than number of columns, extra columns will be rendered without a header. Extra header items will be ignored.
 

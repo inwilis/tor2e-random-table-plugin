@@ -1,16 +1,13 @@
 import {RandomTable} from "./RandomTable";
 import {Rows} from "./Rows";
 import {setIcon} from "obsidian";
-import {ensureArraySize} from "./utils";
 
 export class FeatDieRandomTable extends RandomTable {
 
-    constructor(containerEl: HTMLElement, header: string[], rows: Rows) {
+    constructor(containerEl: HTMLElement, header: string[], rows: Rows, params: any) {
         super(containerEl,
-            (header.length == 0 && rows.columnsCount == 3)
-                ? ["Feat Die Roll", "Result", "Description"]
-                : ensureArraySize(header, rows.columnsCount),
-            rows,
+            (header.length == 0 && rows.columnsCount == 3) ? ["Feat Die Roll", "Result", "Description"] : header,
+            rows, params,
             (s: string) => {
                 if (s == "G") {
                     return '12'

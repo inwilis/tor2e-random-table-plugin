@@ -26,9 +26,9 @@ export default class Tor2ePlugin extends Plugin {
                 const header = (params.header && Array.isArray(params.header)) ? params.header : []
 
                 if (params.die && params.die == "feat") {
-                    ctx.addChild(new FeatDieRandomTable(el, header, rows))
+                    ctx.addChild(new FeatDieRandomTable(el, header, rows, params))
                 } else {
-                    ctx.addChild(new ImpromptuRandomTable(el, header, rows))
+                    ctx.addChild(new ImpromptuRandomTable(el, header, rows, params))
                 }
 
             } catch (e) {

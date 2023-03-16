@@ -1,16 +1,10 @@
 import {RandomTable} from "./RandomTable";
 import {Rows} from "./Rows";
-import {ensureArraySize} from "./utils";
 
 export class ImpromptuRandomTable extends RandomTable {
 
-    constructor(containerEl: HTMLElement, header: string[], rows: Rows) {
-        super(containerEl,
-            header.length > 0
-                ? ensureArraySize(header, rows.columnsCount)
-                : [],
-            rows,
-            null)
+    constructor(containerEl: HTMLElement, header: string[], rows: Rows, params: any) {
+        super(containerEl, header, rows, params, null)
     }
 
     renderBody(tbody: HTMLTableSectionElement) {
