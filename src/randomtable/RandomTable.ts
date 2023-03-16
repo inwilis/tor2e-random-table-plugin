@@ -2,11 +2,16 @@ import {Rows} from "./Rows";
 import {MarkdownRenderChild, Notice, setIcon} from "obsidian";
 import {randomIntFromInterval} from "./utils";
 import {CSS_CLASS_ROLL_BUTTON, CSS_CLASS_TABLE} from "../constants";
+import {RollResults} from "./RollResults";
+import {NumericRange} from "./NumericRange";
 
 export abstract class RandomTable extends MarkdownRenderChild {
 
-    protected constructor(containerEl: HTMLElement, readonly header: string[], readonly rows: Rows) {
+    readonly rollResults: RollResults
+
+    protected constructor(containerEl: HTMLElement, readonly header: string[], readonly rows: Rows, rollResultTransformer: ((s: string) => string) | null) {
         super(containerEl)
+        this.rollResults = new RollResults(rows.rows, rollResultTransformer)
     }
 
     onload() {
@@ -14,7 +19,7 @@ export abstract class RandomTable extends MarkdownRenderChild {
     }
 
     roll(): number {
-        return randomIntFromInterval(this.rows.minRoll, this.rows.maxRoll)
+        return randomIntFromInterval(this.rollResults.minRoll, this.rollResults.maxRoll)
     }
 
     hasRows(): boolean {
@@ -48,13 +53,14 @@ export abstract class RandomTable extends MarkdownRenderChild {
 
     configureButton(button: HTMLElement, table: HTMLTableElement) {
         button.addEventListener("click", () => {
-            const roll = this.roll().toString()
-
+            const roll = this.roll()
             new Notice(`Rolled ${roll}`, 1500);
 
             table.querySelectorAll("tr").forEach(el => {
                 el.removeClass("highlight")
-                if ((el.getAttribute("roll") || "").split(",").includes(roll)) {
+                const rangeAttr = el.getAttribute("range")
+
+                if (rangeAttr && new NumericRange(rangeAttr).includes(roll)) {
                     el.addClass("highlight")
                 }
             })

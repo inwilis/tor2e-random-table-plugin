@@ -10,12 +10,21 @@ export class FeatDieRandomTable extends RandomTable {
             (header.length == 0 && rows.columnsCount == 3)
                 ? ["Feat Die Roll", "Result", "Description"]
                 : ensureArraySize(header, rows.columnsCount),
-            rows);
+            rows,
+            (s: string) => {
+                if (s == "G") {
+                    return '12'
+                } else if (s == "E") {
+                    return '11'
+                } else {
+                    return s
+                }
+            })
     }
 
     renderBody(tbody: HTMLTableSectionElement) {
         this.rows.rows.forEach((row, row_index) => {
-            const tr = tbody.createEl("tr", {attr: {"roll": this.rows.rollsForRows[row_index].join(",")}})
+            const tr = tbody.createEl("tr", {attr: {"range": this.rollResults.ranges[row_index].toString()}})
             row.forEach((cell, col_index) => {
                 this.createCell(tr, cell, col_index)
             })
@@ -23,7 +32,7 @@ export class FeatDieRandomTable extends RandomTable {
     }
 
     private createCell(parent: HTMLTableRowElement, text: string, column: number) {
-        const td = parent.createEl("td", {text: text});
+        const td = parent.createEl("td", {text: text})
         if (column == 0) {
             if (text == "G") {
                 td.addClass("gandalf-rune")

@@ -1,5 +1,5 @@
 import {describe, expect, test} from "@jest/globals";
-import {ensureArraySize, ensureArraySizeInPlace, parseRollExpression} from "../src/randomtable/utils";
+import {ensureArraySize, ensureArraySizeInPlace} from "../src/randomtable/utils";
 
 describe("testing ensureArraySize()", () => {
 
@@ -28,38 +28,4 @@ describe("testing ensureArraySizeInPlace()", () => {
     })
 })
 
-describe("testing parseRollExpression()", () => {
 
-    test("should parse numbers", () => {
-        expect(parseRollExpression("1")).toStrictEqual([1])
-        expect(parseRollExpression("4")).toStrictEqual([4])
-        expect(parseRollExpression("17")).toStrictEqual([17])
-        expect(parseRollExpression("101")).toStrictEqual([101])
-    })
-
-    test("should parse feat die expressions", () => {
-        expect(parseRollExpression("G")).toStrictEqual([12])
-        expect(parseRollExpression("E")).toStrictEqual([11])
-    })
-
-    test("should parse ranges", () => {
-        expect(parseRollExpression("1-3")).toStrictEqual([1, 2, 3])
-        expect(parseRollExpression("17-19")).toStrictEqual([17, 18, 19])
-        expect(parseRollExpression("101-106")).toStrictEqual([101, 102, 103, 104, 105, 106])
-    })
-
-    test("should not parse incorrect ranges", () => {
-        expect(parseRollExpression("1-1")).toStrictEqual([])
-        expect(parseRollExpression("19-17")).toStrictEqual([])
-        expect(parseRollExpression("101-")).toStrictEqual([])
-        expect(parseRollExpression("-17")).toStrictEqual([])
-        expect(parseRollExpression("19-17-")).toStrictEqual([])
-    })
-
-    test("should not parse non-numbers", () => {
-        expect(parseRollExpression("")).toStrictEqual([])
-        expect(parseRollExpression("-1")).toStrictEqual([])
-        expect(parseRollExpression("a")).toStrictEqual([])
-        expect(parseRollExpression("1-a")).toStrictEqual([])
-    })
-})

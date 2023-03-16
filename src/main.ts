@@ -3,7 +3,7 @@ import {registerIcons} from "./icons";
 import {CODE_BLOCK_RANDOM_TABLE, CSS_CLASS_ERROR} from "./constants";
 import {Rows} from "./randomtable/Rows";
 import {FeatDieRandomTable} from "./randomtable/FeatDieRandomTable";
-import {FlatDistributionRandomTable} from "./randomtable/FlatDistributionRandomTable";
+import {ImpromptuRandomTable} from "./randomtable/ImpromptuRandomTable";
 
 export default class Tor2ePlugin extends Plugin {
 
@@ -20,20 +20,22 @@ export default class Tor2ePlugin extends Plugin {
     async processRandomTableCodeBlock(source: string, el: HTMLElement, ctx: MarkdownPostProcessorContext): Promise<void> {
         const params = {...parseYaml(source)}
 
-        if (params.rows && Array.isArray(params.rows)) {
+        if (params.rows && Array.isArray(params.rows) && params.rows.length > 0) {
             try {
                 const rows = new Rows(params.rows)
                 const header = (params.header && Array.isArray(params.header)) ? params.header : []
 
-                if (params.die && params.die == "feat" && rows.minRoll == 1 && rows.maxRoll == 12) {
+                if (params.die && params.die == "feat") {
                     ctx.addChild(new FeatDieRandomTable(el, header, rows))
                 } else {
-                    ctx.addChild(new FlatDistributionRandomTable(el, header, rows))
+                    ctx.addChild(new ImpromptuRandomTable(el, header, rows))
                 }
 
             } catch (e) {
                 el.createSpan({text: e, cls: CSS_CLASS_ERROR})
             }
+        } else {
+            el.createSpan({text: "Error: Random table must contain a list of rows", cls: CSS_CLASS_ERROR})
         }
     }
 }
