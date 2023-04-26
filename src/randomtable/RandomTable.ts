@@ -1,9 +1,10 @@
 import {Rows} from "./Rows";
 import {MarkdownRenderChild, Notice, setIcon} from "obsidian";
-import {ensureArraySize, randomIntFromInterval} from "./utils";
+import {ensureArraySize} from "./utils";
 import {CSS_CLASS_ROLL_BUTTON, CSS_CLASS_TABLE} from "../constants";
 import {RollResults} from "./RollResults";
 import {NumericRange} from "./NumericRange";
+import {Random} from "random-js";
 
 export abstract class RandomTable extends MarkdownRenderChild {
 
@@ -11,7 +12,7 @@ export abstract class RandomTable extends MarkdownRenderChild {
 
     readonly rollResults: RollResults
 
-    protected constructor(containerEl: HTMLElement, header: string[], readonly rows: Rows, readonly params:any, rollResultTransformer: ((s: string) => string) | null) {
+    protected constructor(readonly random: Random, containerEl: HTMLElement, header: string[], readonly rows: Rows, readonly params:any, rollResultTransformer: ((s: string) => string) | null) {
         super(containerEl)
         this.rollResults = new RollResults(rows.rows, rollResultTransformer)
         this.header = ensureArraySize(header, rows.columnsCount)
@@ -22,7 +23,7 @@ export abstract class RandomTable extends MarkdownRenderChild {
     }
 
     roll(): number {
-        return randomIntFromInterval(this.rollResults.minRoll, this.rollResults.maxRoll)
+        return this.random.integer(this.rollResults.minRoll, this.rollResults.maxRoll)
     }
 
     hasRows(): boolean {
@@ -64,12 +65,8 @@ export abstract class RandomTable extends MarkdownRenderChild {
             new Notice(`Rolled ${roll}`, 1500);
 
             table.querySelectorAll("tr").forEach(el => {
-                el.removeClass("highlight")
                 const rangeAttr = el.getAttribute("range")
-
-                if (rangeAttr && new NumericRange(rangeAttr).includes(roll)) {
-                    el.addClass("highlight")
-                }
+                el.toggleClass("highlight", rangeAttr ? new NumericRange(rangeAttr).includes(roll) : false)
             })
         })
     }

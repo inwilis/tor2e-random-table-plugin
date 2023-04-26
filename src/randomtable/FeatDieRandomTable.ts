@@ -1,11 +1,12 @@
 import {RandomTable} from "./RandomTable";
 import {Rows} from "./Rows";
 import {setIcon} from "obsidian";
+import {Random} from "random-js";
 
 export class FeatDieRandomTable extends RandomTable {
 
-    constructor(containerEl: HTMLElement, header: string[], rows: Rows, params: any) {
-        super(containerEl,
+    constructor(random: Random, containerEl: HTMLElement, header: string[], rows: Rows, params: any) {
+        super(random, containerEl,
             (header.length == 0 && rows.columnsCount == 3) ? ["Feat Die Roll", "Result", "Description"] : header,
             rows, params,
             (s: string) => {

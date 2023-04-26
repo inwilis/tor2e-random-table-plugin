@@ -1,10 +1,11 @@
 import {RandomTable} from "./RandomTable";
 import {Rows} from "./Rows";
+import {Random} from "random-js";
 
 export class ImpromptuRandomTable extends RandomTable {
 
-    constructor(containerEl: HTMLElement, header: string[], rows: Rows, params: any) {
-        super(containerEl, header, rows, params, null)
+    constructor(random: Random, containerEl: HTMLElement, header: string[], rows: Rows, params: any) {
+        super(random, containerEl, header, rows, params, null)
     }
 
     renderBody(tbody: HTMLTableSectionElement) {

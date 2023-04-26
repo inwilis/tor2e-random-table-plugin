@@ -4,10 +4,14 @@ import {CODE_BLOCK_RANDOM_TABLE, CSS_CLASS_ERROR} from "./constants";
 import {Rows} from "./randomtable/Rows";
 import {FeatDieRandomTable} from "./randomtable/FeatDieRandomTable";
 import {ImpromptuRandomTable} from "./randomtable/ImpromptuRandomTable";
+import {Engine, MersenneTwister19937, Random} from "random-js";
 
 export default class Tor2ePlugin extends Plugin {
 
+    private random: Random
+
     async onload() {
+        this.random = new Random(MersenneTwister19937.autoSeed())
         registerIcons();
 
         this.registerMarkdownCodeBlockProcessor(CODE_BLOCK_RANDOM_TABLE, this.processRandomTableCodeBlock.bind(this))
@@ -26,9 +30,9 @@ export default class Tor2ePlugin extends Plugin {
                 const header = (params.header && Array.isArray(params.header)) ? params.header : []
 
                 if (params.die && params.die == "feat") {
-                    ctx.addChild(new FeatDieRandomTable(el, header, rows, params))
+                    ctx.addChild(new FeatDieRandomTable(this.random, el, header, rows, params))
                 } else {
-                    ctx.addChild(new ImpromptuRandomTable(el, header, rows, params))
+                    ctx.addChild(new ImpromptuRandomTable(this.random, el, header, rows, params))
                 }
 
             } catch (e) {
