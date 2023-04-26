@@ -1,7 +1,6 @@
 import {Rows} from "./Rows";
 import {MarkdownRenderChild, Notice, setIcon} from "obsidian";
 import {ensureArraySize} from "./utils";
-import {CSS_CLASS_ROLL_BUTTON, CSS_CLASS_TABLE} from "../constants";
 import {RollResults} from "./RollResults";
 import {NumericRange} from "./NumericRange";
 import {Random} from "random-js";
@@ -12,7 +11,7 @@ export abstract class RandomTable extends MarkdownRenderChild {
 
     readonly rollResults: RollResults
 
-    protected constructor(readonly random: Random, containerEl: HTMLElement, header: string[], readonly rows: Rows, readonly params:any, rollResultTransformer: ((s: string) => string) | null) {
+    protected constructor(readonly random: Random, containerEl: HTMLElement, header: string[], readonly rows: Rows, readonly params: any, rollResultTransformer: ((s: string) => string) | null) {
         super(containerEl)
         this.rollResults = new RollResults(rows.rows, rollResultTransformer)
         this.header = ensureArraySize(header, rows.columnsCount)
@@ -38,8 +37,14 @@ export abstract class RandomTable extends MarkdownRenderChild {
         if (this.hasRows()) {
             const table = el.createEl("table", {cls: this.getTableClass()})
 
+            const caption = table.createEl("caption")
+            const captionContent = caption.createEl("div", {cls: "caption-content"})
+
+            const button = captionContent.createEl("span", {cls: "clickable-icon"})
+            setIcon(button, "dices")
+
             if (this.params.caption) {
-                table.createEl("caption", {text: this.params.caption})
+                captionContent.createEl("span", {text: this.params.caption})
             }
 
             if (this.hasHeader()) {
@@ -51,9 +56,6 @@ export abstract class RandomTable extends MarkdownRenderChild {
             const tbody = table.createEl("tbody")
 
             this.renderBody(tbody)
-
-            const button = el.createEl("span", {href: "#", cls: CSS_CLASS_ROLL_BUTTON})
-            setIcon(button, "dices")
 
             this.configureButton(button, table)
         }
@@ -72,7 +74,7 @@ export abstract class RandomTable extends MarkdownRenderChild {
     }
 
     getTableClass(): string {
-        return CSS_CLASS_TABLE
+        return "tor2e-random-table"
     }
 
     abstract renderBody(tbody: HTMLTableSectionElement): void;

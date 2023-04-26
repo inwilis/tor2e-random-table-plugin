@@ -1,57 +1,25 @@
-table.tor2e-random-table > tbody > tr > td:nth-child(1), table.tor2e-random-table > thead > tr > th:nth-child(1) {
-    text-align: center;
+table.tor2e-random-table {
+    caption {
+        text-align: left;
+        font-weight: bold;
+        padding-bottom: 0.5em;
+    }
+
+    td:nth-child(1),
+    th:nth-child(1) {
+        text-align: center;
+    }
+
+    td.eye-of-sauron {
+        --icon-size: 1.5em;
+    }
+
+    tr.highlight td {
+        background: var(--text-highlight-bg);
+    }
+
+    .caption-content {
+        display: flex;
+        column-gap: var(--size-4-1);
+    }
 }
-
-table.tor2e-random-table td.eye-of-sauron {
-    --icon-size: 1.5em;
-}
-
-table.tor2e-random-table tr.highlight td {
-    background: #c75959c2;
-}
-
-table.tor2e-random-table caption {
-    text-align: left;
-    font-weight: bold;
-    padding-bottom: 0.5em;
-}
-
-/* floating roll button */
-
-div.block-language-tor2e-random-table {
-    position: relative;
-}
-
-div.block-language-tor2e-random-table .tor2e-random-table-roll-button {
-    visibility: hidden;
-}
-
-div.block-language-tor2e-random-table:hover .tor2e-random-table-roll-button {
-    visibility: visible;
-}
-
-.tor2e-random-table-roll-button {
-    position: absolute;
-    display: flex;
-    top: 6px;
-    left: 6px;
-
-    padding: 4px;
-
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.6);
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 6px;
-
-    cursor: pointer;
-}
-
-.tor2e-random-table-roll-button:hover {
-    background: rgba(255, 255, 255, 0.75);
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
-}
-
-.tor2e-random-table-roll-button:active {
-    background: rgba(255, 255, 255, 0.6);
-}
-
-

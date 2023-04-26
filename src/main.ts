@@ -1,10 +1,9 @@
 import {MarkdownPostProcessorContext, parseYaml, Plugin} from 'obsidian';
 import {registerIcons} from "./icons";
-import {CODE_BLOCK_RANDOM_TABLE, CSS_CLASS_ERROR} from "./constants";
 import {Rows} from "./randomtable/Rows";
 import {FeatDieRandomTable} from "./randomtable/FeatDieRandomTable";
 import {ImpromptuRandomTable} from "./randomtable/ImpromptuRandomTable";
-import {Engine, MersenneTwister19937, Random} from "random-js";
+import {MersenneTwister19937, Random} from "random-js";
 
 export default class Tor2ePlugin extends Plugin {
 
@@ -14,7 +13,7 @@ export default class Tor2ePlugin extends Plugin {
         this.random = new Random(MersenneTwister19937.autoSeed())
         registerIcons();
 
-        this.registerMarkdownCodeBlockProcessor(CODE_BLOCK_RANDOM_TABLE, this.processRandomTableCodeBlock.bind(this))
+        this.registerMarkdownCodeBlockProcessor("tor2e-random-table", this.processRandomTableCodeBlock.bind(this))
     }
 
     onunload() {
@@ -36,10 +35,10 @@ export default class Tor2ePlugin extends Plugin {
                 }
 
             } catch (e) {
-                el.createSpan({text: e, cls: CSS_CLASS_ERROR})
+                el.createSpan({text: e, cls: "tor2e-error"})
             }
         } else {
-            el.createSpan({text: "Error: Random table must contain a list of rows", cls: CSS_CLASS_ERROR})
+            el.createSpan({text: "Error: Random table must contain a list of rows", cls: "tor2e-error"})
         }
     }
 }
