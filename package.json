@@ -1,6 +1,6 @@
 {
     "name": "tor2e-random-table-plugin",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Renders TOR2e random tables and allows rolling on those inside Obsidian note.",
     "main": "main.js",
     "scripts": {
