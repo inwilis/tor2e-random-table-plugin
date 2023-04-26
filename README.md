@@ -50,7 +50,7 @@ number 4 is not associated with any row.
 
 ## Rolling on a table
 
-When mouse cursor is placed over the table, a hovering button appears in a left top corner. When it is clicked, plugin will roll on this table and highlight a row
+Roll button is displayed on the left side of table caption. When it is clicked, plugin will roll on this table and highlight a row
 that was chosen. Floating notification with the random number that was actually generated, will appear for the short time.
 
 ## Impromptu tables
@@ -58,7 +58,6 @@ that was chosen. Floating notification with the random number that was actually 
 Random table shown in example above will be interpreted as **impromptu table**. It means that the rule by which random number is generated will be inferred from the
 roll results. Namely, random number will be chosen from the range composed of all roll results, with equal distribution of probabilities. For the table above it means
 that random number will be chosen from the range between 1 and 6, inclusive.
-
 
 ## Feat Die tables
 
